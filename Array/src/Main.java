@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -34,24 +36,46 @@ public class Main {
         }
     }
 
+//    118. Pascal's Triangle
+    public static List<List<Integer>> generate(int numRows){
+        List<List<Integer>> fArray = new ArrayList<List<Integer>>();
+
+        for (int i = 0; i < numRows; i++){
+            List<Integer>  tArray = new ArrayList<Integer>();
+
+            tArray.add(1);
+
+            for(int j = 1; j < i; j++){
+                int temp = fArray.get(i-1).get(j-1) + fArray.get(i-1).get(j);
+                tArray.add(temp);
+            }
+            if (i>0){
+                tArray.add(1);
+            }
+
+            fArray.add(tArray);
+        }
+        return fArray;
+    }
+
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
 
-//        int x = scn.nextInt();
-//        int[] nums;
-//        nums = new int[x];
-//
-//        for (int i = 0; i < x; i++){
-//            nums[i] = scn.nextInt();
-//        }
-//
-//        int k = removeDuplicates(nums);
-//        System.out.println("Length of non-duplicate Array: " + k);
-//
-//        System.out.print("Unique elements: ");
-//        for (int i = 0; i < k; i++) {
-//            System.out.print(nums[i] + " ");
-//        }
+        int x = scn.nextInt();
+        int[] nums;
+        nums = new int[x];
+
+        for (int i = 0; i < x; i++){
+            nums[i] = scn.nextInt();
+        }
+
+        int k = removeDuplicates(nums);
+        System.out.println("Length of non-duplicate Array: " + k);
+
+        System.out.print("Unique elements: ");
+        for (int i = 0; i < k; i++) {
+            System.out.print(nums[i] + " ");
+        }
 
 //        88. Merge Sorted Array
 //        user has to enter the data in non-decreasing order
@@ -81,5 +105,12 @@ public class Main {
         for (int i = 0; i < m+n; i++) {
             System.out.print(nums1[i] + " ");
         }
+
+//        118. Pascal's Triangle
+
+        System.out.println("Enter the number of rows: ");
+        int numRows = scn.nextInt();
+
+        System.out.println(generate(numRows));
     }
 }
